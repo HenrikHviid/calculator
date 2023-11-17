@@ -1,2 +1,2 @@
 # calculator
-Simpel Lommeregner
+Simpel lommeregner
