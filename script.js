@@ -147,11 +147,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Tilføjede knapper: M, R, C, CLR, osv.
     const buttons = [
-        'M', 'R', 'C', 'CLR',
-        '7', '8', '9', '/',
-        '4', '5', '6', '*',
-        '1', '2', '3', '-',
-        '0', '.', '=', '+'
+        'π', 'M', 'R', 'C', 'CLR',
+        '7', '8', '9', '%', '/',
+        '4', '5', '6', '^2', '*',
+        '1', '2', '3', '√', '-',
+        '+/-', '0', '.', '=', '+'
     ];
 
     // Tilføj knapper ved at iterere over knapværdierne
