@@ -8,12 +8,15 @@ document.addEventListener('DOMContentLoaded', function () {
     let calculationResult = false;
 
     // Funktion til at tilføje en knap
-    function addButton(value, specialClass = '') {
+    function addButton(value, specialClass, operatorClass = '') {
         const button = document.createElement('div');
         button.textContent = value;
         button.classList.add('button'); // Tilføj standardklasse til knapper
         if (specialClass) {
-            button.classList.add(specialClass); // Tilføj ekstra klasse til særlige knapper
+            button.classList.add(specialClass); // Tilføj ekstra klasse special knapper
+        }
+        if (operatorClass) {
+            button.classList.add(operatorClass); // Tilføj ekstra klasse til operator knapper
         }
         button.addEventListener('click', () => handleButtonClick(value));
         buttonsContainer.appendChild(button);
@@ -142,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
         calculationResult = false; // Nulstil variablen, når der tilføjes en ny værdi
     }
 
-    // Tilføjede knapper: M1, M2, C, CLR, osv.
+    // Tilføjede knapper: M, R, C, CLR, osv.
     const buttons = [
         'M', 'R', 'C', 'CLR',
         '7', '8', '9', '/',
@@ -153,8 +156,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Tilføj knapper ved at iterere over knapværdierne
     buttons.forEach(buttonValue => {
-        // Tilføj ekstra klasse til 'M1' og 'M2' knapper
-        const specialClass = buttonValue === 'M' || buttonValue === 'R' ? 'special' : '';
-        addButton(buttonValue, specialClass);
+        // Tilføj ekstra klasse til functions buttons knapper
+        const functionclass = buttonValue === 'M' || buttonValue === 'R' || buttonValue === 'C' || buttonValue === 'CLR' ? 'function' : '';
+        const operatorClass = buttonValue === '/' || buttonValue === '*' || buttonValue === '-' || buttonValue === '+' || buttonValue === '=' ? 'operator' : '';
+        addButton(buttonValue, functionclass, operatorClass);
+
     });
 });

@@ -42,9 +42,10 @@ body {
 .button {
     padding: 15px;
     font-size: 1.2em;
-    border: 1px solid #ccc;
+    border: 1px solid #CCC;
     cursor: pointer;
     transition: background-color 0.3s;
+    text-align: center;
 }
 
 .button:hover {
@@ -52,15 +53,11 @@ body {
 }
 
 .operator {
-    background-color: #f1f1f1;
+    background-color: 	#F9812A;
+    color: #FFF
 }
 
-.equal {
-    background-color: #28a745;
-    color: #fff;
+.function {
+    background-color: #F5F5F5;
 }
 
-.special {
-    background-color: #007bff;
-    color: #fff;
-}
