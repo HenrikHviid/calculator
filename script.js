@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const display = document.getElementById('display');
+    const errorMessage = document.getElementById('error-message');
     const buttonsContainer = document.querySelector('.buttons');
 
     let memories = new Array(10).fill('');
@@ -18,6 +19,16 @@ document.addEventListener('DOMContentLoaded', function () {
         buttonsContainer.appendChild(button);
     }
 
+        // Funktion til at vise fejlmeddelelse
+        function showErrorMessage(message) {
+            errorMessage.textContent = message;
+        }
+    
+        // Funktion til at skjule fejlmeddelelse
+        function hideErrorMessage() {
+            errorMessage.textContent = '';
+        }
+
     // Funktion til at håndtere knaptryk
     function handleButtonClick(value) {
         switch (value) {
@@ -29,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 break;
             case 'CLR':
                 clearDisplay();
+                hideErrorMessage();
                 break;
             case 'M':
                 saveToMemory();
@@ -38,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 break;
             default:
                 addToDisplay(value);
+                hideErrorMessage();
         }
     }
 
@@ -72,12 +85,12 @@ document.addEventListener('DOMContentLoaded', function () {
         // Automatisk vælg den næste ledige hukommelsesplads
         selectedMemorySlot = memories.indexOf('');
         if (selectedMemorySlot === -1) {
-            alert('Alle hukommelsespladser er fyldte.');
+            showErrorMessage('Alle hukommelsespladser er fyldte.');
             return;
         }
 
         memories[selectedMemorySlot] = inputValue;
-        alert(`Værdien er gemt i hukommelse ${selectedMemorySlot + 1}`);
+        showErrorMessage(`Værdien er gemt i hukommelse ${selectedMemorySlot + 1}`);
     }
 
     // Funktion til at vise popup med gemte værdier og lade brugeren vælge

@@ -18,9 +18,20 @@ body {
 #display {
     width: 100%;
     padding: 10px;
+    min-height: 2em;
     font-size: 1.5em;
     border: none;
     outline: none;
+}
+
+.error-message {
+    padding: 5px;
+    min-height: 1.5em;
+    font-size: 0.8em;
+    border: none;
+    outline: none;
+    background: #FAFAFA;
+    color: red;
 }
 
 .buttons {
@@ -37,7 +48,7 @@ body {
 }
 
 .button:hover {
-    background-color: #eee;
+    background-color: #CCC;
 }
 
 .operator {
