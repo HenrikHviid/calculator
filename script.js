@@ -1,22 +1,24 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const display = document.getElementById('display');
     const buttonsContainer = document.querySelector('.buttons');
 
     let memory1 = 0;
     let memory2 = 0;
+    let calculationResult = false;
 
+    // Funktion til at tilføje en knap
     function addButton(value, specialClass = '') {
         const button = document.createElement('div');
         button.textContent = value;
-        button.classList.add('button');  // Fjern specialClass her
+        button.classList.add('button'); // Tilføj standardklasse til knapper
         if (specialClass) {
-            button.classList.add(specialClass);  // Tilføj specialClass kun hvis det er defineret
+            button.classList.add(specialClass); // Tilføj ekstra klasse til særlige knapper
         }
         button.addEventListener('click', () => handleButtonClick(value));
         buttonsContainer.appendChild(button);
     }
-    
 
+    // Funktion til at håndtere knaptryk
     function handleButtonClick(value) {
         switch (value) {
             case '=':
@@ -37,25 +39,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Funktion til at evaluere udtrykket
     function evaluateExpression() {
         display.value = eval(display.value);
+        calculationResult = true // sætter variabel til tegn ikke må slettes
     }
 
+    // Funktion til at slette det sidste tegn
     function deleteLastCharacter() {
         const currentExpression = display.value;
-        const lastCharacter = currentExpression.slice(-1);
 
-        if (['+', '-', '*', '/'].includes(lastCharacter)) {
-            display.value = currentExpression.slice(0, -1);
-        } else {
-            display.value = currentExpression;
+        // Tjek om det sidste tegn er resultatet af en udregning
+        if (calculationResult) {
+            return;
         }
+        // Slet det sidste tegn
+        display.value = currentExpression.slice(0, -1);
     }
 
+    // Funktion til at rydde displayet
     function clearDisplay() {
         display.value = '';
     }
 
+    // Funktion til at gemme værdi i hukommelse
     function saveToMemory(memoryType) {
         const memoryValue = display.value;
         if (memoryType === 'M1') {
@@ -65,19 +72,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Funktion til at tilføje værdi til displayet
     function addToDisplay(value) {
         const currentExpression = display.value;
     
-        // Tjek om displayet er tomt og det indtastede tegn er en af de forbudte operatører
+
+        // Tjek om displayet er tomt, og det indtastede tegn er en af de forbudte operatører
         if (currentExpression === '' && ['+', '/', '*'].includes(value)) {
             // Ignorer tilføjelsen
             return;
         }
-    
+
+        calculationResult = false // sætter variabel til tegn må slettes
         display.value += value;
     }
-    
-    // Tilføjede knapper: M1, M2, C, CLR
+
+    // Tilføjede knapper: M1, M2, C, CLR, osv.
     const buttons = [
         'M1', 'M2', 'C', 'CLR',
         '7', '8', '9', '/',
@@ -86,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
         '0', '.', '=', '+'
     ];
 
+    // Tilføj knapper ved at iterere over knapværdierne
     buttons.forEach(buttonValue => {
         // Tilføj ekstra klasse til 'M1' og 'M2' knapper
         const specialClass = buttonValue === 'M1' || buttonValue === 'M2' ? 'special' : '';
