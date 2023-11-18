@@ -75,16 +75,22 @@ document.addEventListener('DOMContentLoaded', function () {
     // Funktion til at tilføje værdi til displayet
     function addToDisplay(value) {
         const currentExpression = display.value;
+        const lastCharacter = currentExpression.slice(-1);
     
-
         // Tjek om displayet er tomt, og det indtastede tegn er en af de forbudte operatører
         if (currentExpression === '' && ['+', '/', '*'].includes(value)) {
             // Ignorer tilføjelsen
             return;
         }
-
-        calculationResult = false // sætter variabel til tegn må slettes
+    
+        // Tjek om det sidste tegn er resultatet af en udregning
+        if (calculationResult && !['+', '-', '*', '/'].includes(value)) {
+            // Ignorer tilføjelsen, hvis det er et tal efter en udregning
+            return;
+        }
+    
         display.value += value;
+        calculationResult = false; // Nulstil variablen, når der tilføjes en ny værdi
     }
 
     // Tilføjede knapper: M1, M2, C, CLR, osv.
